@@ -24,7 +24,9 @@
       document.getElementById("nameS").innerHTML="  Lütfen kutucuğu doldurunuz!";
       state =false;
     }else{
-      document.getElementById("nameS").innerHTML="&nbsp;";
+      if (document.getElementById("nameS")!=undefined){
+        document.getElementById("nameS").innerHTML="&nbsp;";
+      }
     }
 
     //email - kontrol
@@ -40,7 +42,9 @@
         document.getElementById("emailS").innerHTML="  Geçerli bir e-mail giriniz!";
       }
     }else{
-      document.getElementById("emailS").innerHTML="&nbsp;";
+      if(document.getElementById("emailS")!=undefined){
+        document.getElementById("emailS").innerHTML="&nbsp;";
+      }
     }
 
     //Sadece sayısal - kontrol
@@ -55,7 +59,9 @@
         document.getElementById("sayisalS").innerHTML="  Sayısal bir değer giriniz!";
       }
     }else{
-      document.getElementById("sayisalS").innerHTML="&nbsp;";
+      if (document.getElementById("sayisalS")!=undefined){
+        document.getElementById("sayisalS").innerHTML="&nbsp;";
+      }
     }
 
     //Sadece sayısal olan ve 12 basamak uzunluğundaki sayi - kontrol
@@ -72,7 +78,9 @@
         document.getElementById("basamakliS").innerHTML="  12 basamaklı sayısal bir değer girmelisiniz!";
       }
     }else{
-      document.getElementById("basamakliS").innerHTML="&nbsp;";
+      if (document.getElementById("basamakliS")!=undefined){
+        document.getElementById("basamakliS").innerHTML="&nbsp;";
+      }
     }
 
     //Sadece harf (a..z veya A..Z) - kontrol
@@ -95,7 +103,9 @@
         document.getElementById("alfaS").innerHTML="  Sadece harflerden oluşan bir değer giriniz!";
       }
     }else{
-      document.getElementById("alfaS").innerHTML="&nbsp;";
+      if (document.getElementById("alfaS")!=undefined){
+        document.getElementById("alfaS").innerHTML="&nbsp;";
+      }
     }
 
     //Sadece harf ve en fazla 30 uzunlukta olan string - kontrol
@@ -120,12 +130,20 @@
         document.getElementById("max30S").innerHTML="  Stringin uzunluğu en fazla 30 olmalı!";
       }
     }else{
-      document.getElementById("max30S").innerHTML="&nbsp;";
+      if (document.getElementById("max30S")!=undefined){
+        document.getElementById("max30S").innerHTML="&nbsp;";
+      }
     }
 
     //3 kelimeden oluşan string - kontrol
     var kelime = uckelimeForm.split(" ");
-    if (uckelimeForm == "" || kelime.length !=3) {
+    var kelimeSayisi=0;
+    for (i = 0; i<kelime.length; i++) {
+      if(kelime[i]!=""){
+        kelimeSayisi++;
+      }
+    }
+    if (uckelimeForm == "" || kelimeSayisi !=3) {
       if (document.getElementById("uckelimeS")==undefined) {
         document.querySelector("#uckelime").outerHTML="<nobr>"+document.querySelector("#uckelime").outerHTML+"<span id='uckelimeS' style='color:Red'>&nbsp;</span></nobr>";
       }
@@ -136,7 +154,9 @@
         document.getElementById("uckelimeS").innerHTML="  String 3 kelimeden oluşmalı!";
       }
     }else{
-      document.getElementById("uckelimeS").innerHTML="&nbsp;";
+      if (document.getElementById("uckelimeS")!=undefined) {
+        document.getElementById("uckelimeS").innerHTML="&nbsp;";
+      }
     }
 
     //En az 1 büyük harf, en az 1 küçük harf, en az bir rakam ve en az 1 noktalama işareti içeren ve en az 8 uzunluğunda olan metin - kontrol
@@ -145,7 +165,7 @@
     var rFlag=0;
     var nFlag=0;
 
-    for(var j=0; j<passwordForm.length; bj++){
+    for(var j=0; j<passwordForm.length; j++){
         if(passwordForm.charCodeAt(j) >= 65 && passwordForm.charCodeAt(j) <= 90){
             bHarfFlag++;
         }
@@ -172,7 +192,9 @@
         document.getElementById("passwordS").innerHTML="  Password en az bir büyük harf, bir küçük harf, bir rakam ve bir noktalama işareti içermeli!";
       }
     }else{
-      document.getElementById("passwordS").innerHTML="&nbsp;";
+      if (document.getElementById("passwordS")!=undefined){
+        document.getElementById("passwordS").innerHTML="&nbsp;";
+      }
     }
 
     return state;
