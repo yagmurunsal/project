@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+  function validateForm() {
+    //form kutucukların içine girilen değerleri değişkene atama işlemi
+    var nameForm = document.querySelector("#name").value;
+    var emailForm = document.querySelector("#email").value;
+    var sayisalForm = document.querySelector("#sayisal").value;
+    var basamakliForm = document.querySelector("#basamakli").value;
+    var alfaForm = document.querySelector("#alfa").value;
+    var max30Form = document.querySelector("#max30").value;
+    var uckelimeForm = document.querySelector("#uckelime").value;
+    var passwordForm = document.querySelector("#password").value;
+
+    //fonksiyonun true false durumunu tutan değişken
+    var state =true;
+
+    //Boş olmamalı - kontrol
+    if (nameForm == "") {
+      if (document.getElementById("nameS")==undefined) {
+        document.querySelector("#name").outerHTML="<nobr>"+document.querySelector("#name").outerHTML+"<span id='nameS' style='color:Red'>&nbsp;</span></nobr>";
+      }
+      document.getElementById("nameS").innerHTML="  Lütfen kutucuğu doldurunuz!";
+      state =false;
+    }else{
+      document.getElementById("nameS").innerHTML="&nbsp;";
+    }
+
+    //email - kontrol
+    var regExp = new RegExp(/^[a-z]{1}[\d\w\.-]+@[\d\w-]{3,}\.[\w]{2,3}(\.\w{2})?$/);
+    if (emailForm == "" || regExp.test(emailForm) == false) {
+      if(document.getElementById("emailS")==undefined){
+        document.querySelector("#email").outerHTML="<nobr>"+document.querySelector("#email").outerHTML+"<span id='emailS' style='color:Red'>&nbsp;</span></nobr>";
+      }
+      state =false;
+      if(emailForm == ""){
+        document.getElementById("emailS").innerHTML="  Lütfen kutucuğu doldurunuz!";
+      }else{
+        document.getElementById("emailS").innerHTML="  Geçerli bir e-mail giriniz!";
+      }
+    }else{
+      document.getElementById("emailS").innerHTML="&nbsp;";
+    }
+
+    //Sadece sayısal - kontrol
+    if (sayisalForm == "" || isNaN(sayisalForm)) {
+      if (document.getElementById("sayisalS")==undefined) {
+        document.querySelector("#sayisal").outerHTML="<nobr>"+document.querySelector("#sayisal").outerHTML+"<span id='sayisalS' style='color:Red'>&nbsp;</span></nobr>";
+      }
+      state =false;
+      if(sayisalForm == ""){
+        document.getElementById("sayisalS").innerHTML="  Lütfen kutucuğu doldurunuz!";
+      }else{
+        document.getElementById("sayisalS").innerHTML="  Sayısal bir değer giriniz!";
+      }
+    }else{
+      document.getElementById("sayisalS").innerHTML="&nbsp;";
+    }
+
+    //Sadece sayısal olan ve 12 basamak uzunluğundaki sayi - kontrol
+    if (basamakliForm == "" || isNaN(basamakliForm) || basamakliForm.length!=12) {
+      if (document.getElementById("basamakliS")==undefined) {
+        document.querySelector("#basamakli").outerHTML="<nobr>"+document.querySelector("#basamakli").outerHTML+"<span id='basamakliS' style='color:Red'>&nbsp;</span></nobr>";
+      }
+      state =false;
+      if(basamakliForm == ""){
+        document.getElementById("basamakliS").innerHTML="  Lütfen kutucuğu doldurunuz!";
+      }else if(isNaN(basamakliForm)){
+        document.getElementById("basamakliS").innerHTML="  Sayısal bir değer giriniz!";
+      }else{
+        document.getElementById("basamakliS").innerHTML="  12 basamaklı sayısal bir değer girmelisiniz!";
+      }
+    }else{
+      document.getElementById("basamakliS").innerHTML="&nbsp;";
+    }
+
+    //Sadece harf (a..z veya A..Z) - kontrol
+    var alfaFlag=0;
+    for(var i=0; i<alfaForm.length ; i++){
+        if((alfaForm.charCodeAt(i)>=65 && alfaForm.charCodeAt(i)<=90) || (alfaForm.charCodeAt(i)>=97 && alfaForm.charCodeAt(i)<=122) || alfaForm.charCodeAt(i) == 8 || alfaForm.charCodeAt(i) == 350 || alfaForm.charCodeAt(i) == 351 || alfaForm.charCodeAt(i) == 304 || alfaForm.charCodeAt(i) == 286 || alfaForm.charCodeAt(i) == 287 || alfaForm.charCodeAt(i) == 231 || alfaForm.charCodeAt(i) == 199 || alfaForm.charCodeAt(i) == 305 || alfaForm.charCodeAt(i) == 214 || alfaForm.charCodeAt(i) == 246 || alfaForm.charCodeAt(i) == 220 || alfaForm.charCodeAt(i) == 252){
+           
+        }else{
+          alfaFlag++; 
+        }
+    }
+    if (alfaForm == "" || alfaFlag !=0) {
+      if (document.getElementById("alfaS")==undefined) {
+        document.querySelector("#alfa").outerHTML="<nobr>"+document.querySelector("#alfa").outerHTML+"<span id='alfaS' style='color:Red'>&nbsp;</span></nobr>";
+      }
+      state =false;
+      if(alfaForm == ""){
+        document.getElementById("alfaS").innerHTML="  Lütfen kutucuğu doldurunuz!";
+      }else{
+        document.getElementById("alfaS").innerHTML="  Sadece harflerden oluşan bir değer giriniz!";
+      }
+    }else{
+      document.getElementById("alfaS").innerHTML="&nbsp;";
+    }
+
+    //Sadece harf ve en fazla 30 uzunlukta olan string - kontrol
+    var max30Flag=0;
+    for(var k=0; k<max30Form.length ; k++){
+        if((max30Form.charCodeAt(k)>=65 && max30Form.charCodeAt(k)<=90) || (max30Form.charCodeAt(k)>=97 && max30Form.charCodeAt(k)<=122) || max30Form.charCodeAt(k) == 8 || max30Form.charCodeAt(k) == 350 || max30Form.charCodeAt(k) == 351 || max30Form.charCodeAt(k) == 304 || max30Form.charCodeAt(k) == 286 || max30Form.charCodeAt(k) == 287 || max30Form.charCodeAt(k) == 231 || max30Form.charCodeAt(k) == 199 || max30Form.charCodeAt(k) == 305 || max30Form.charCodeAt(k) == 214 || max30Form.charCodeAt(k) == 246 || max30Form.charCodeAt(k) == 220 || max30Form.charCodeAt(k) == 252){
+           
+        }else{
+          max30Flag++; 
+        }
+    }
+    if (max30Form == "" || max30Flag!=0 || max30Form.length >30) {
+      if (document.getElementById("max30S")==undefined) {
+        document.querySelector("#max30").outerHTML="<nobr>"+document.querySelector("#max30").outerHTML+"<span id='max30S' style='color:Red'>&nbsp;</span></nobr>";
+      }
+      state =false;
+      if(max30Form == ""){
+        document.getElementById("max30S").innerHTML="  Lütfen kutucuğu doldurunuz!";
+      }else if(max30Flag !=0){
+        document.getElementById("max30S").innerHTML="  Sadece harflerden oluşan bir değer giriniz!";
+      }else{
+        document.getElementById("max30S").innerHTML="  Stringin uzunluğu en fazla 30 olmalı!";
+      }
+    }else{
+      document.getElementById("max30S").innerHTML="&nbsp;";
+    }
+
+    //3 kelimeden oluşan string - kontrol
+    var kelime = uckelimeForm.split(" ");
+    if (uckelimeForm == "" || kelime.length !=3) {
+      if (document.getElementById("uckelimeS")==undefined) {
+        document.querySelector("#uckelime").outerHTML="<nobr>"+document.querySelector("#uckelime").outerHTML+"<span id='uckelimeS' style='color:Red'>&nbsp;</span></nobr>";
+      }
+      state =false;
+      if(uckelimeForm == ""){
+        document.getElementById("uckelimeS").innerHTML="  Lütfen kutucuğu doldurunuz!";
+      }else{
+        document.getElementById("uckelimeS").innerHTML="  String 3 kelimeden oluşmalı!";
+      }
+    }else{
+      document.getElementById("uckelimeS").innerHTML="&nbsp;";
+    }
+
+    //En az 1 büyük harf, en az 1 küçük harf, en az bir rakam ve en az 1 noktalama işareti içeren ve en az 8 uzunluğunda olan metin - kontrol
+    var bHarfFlag=0;
+    var kHarfFlag=0;
+    var rFlag=0;
+    var nFlag=0;
+
+    for(var j=0; j<passwordForm.length; bj++){
+        if(passwordForm.charCodeAt(j) >= 65 && passwordForm.charCodeAt(j) <= 90){
+            bHarfFlag++;
+        }
+        if(passwordForm.charCodeAt(j) >= 97 && passwordForm.charCodeAt(j) <= 122){
+            kHarfFlag++; 
+        }
+        if(passwordForm.charCodeAt(j) >= 48 && passwordForm.charCodeAt(j) <= 57){
+            rFlag++;
+        }
+        if((passwordForm.charCodeAt(j) >= 33 && passwordForm.charCodeAt(j) <= 47)||(passwordForm.charCodeAt(j) >= 58 && passwordForm.charCodeAt(j) <= 63)){
+            nFlag++;
+        }
+    }
+    if (passwordForm == "" || passwordForm.length<8 || bHarfFlag==0 || kHarfFlag == 0 || rFlag==0 || nFlag==0) {
+      if (document.getElementById("passwordS")==undefined) {
+        document.querySelector("#password").outerHTML="<nobr>"+document.querySelector("#password").outerHTML+"<span id='passwordS' style='color:Red'>&nbsp;</span></nobr>";
+      }
+      state =false;
+      if(passwordForm == ""){
+        document.getElementById("passwordS").innerHTML="  Lütfen kutucuğu doldurunuz!";
+      }else if(passwordForm.length<8){
+        document.getElementById("passwordS").innerHTML="  Password en az 8 uzunluğunda olmalı!";
+      }else{
+        document.getElementById("passwordS").innerHTML="  Password en az bir büyük harf, bir küçük harf, bir rakam ve bir noktalama işareti içermeli!";
+      }
+    }else{
+      document.getElementById("passwordS").innerHTML="&nbsp;";
+    }
+
+    return state;
+  }
+</script>
+
+</head>
+<body>
+
+<form name="myForm" action="/action_page.php" onsubmit="return validateForm()" method="post">
+  Aşağıdaki hiçbir input boş olmamalı: <br>
+  
+
+  <table style="width:40%">
+  <tr>
+    <td>Boş olmamalı: </td>
+    <td><input type="text" id="name"></td>
+    
+  </tr>
+  <tr>
+    <td>E-mail (Kurallara uygun email): </td>
+    <td><input type="text" id="email"></td>
+    
+  </tr>
+  <tr>
+    <td>Sadece sayısal: </td>
+    <td><input type="text" id="sayisal"></td>
+  </tr>
+  <tr>
+    <td>Sadece sayısal olan ve 12 basamak uzunluğundaki sayi: </td>
+    <td><input type="text" id="basamakli"></td>
+  </tr>
+  <tr>
+    <td>Sadece harf (a..z veya A..Z): </td>
+    <td><input type="text" id="alfa"></td>
+  </tr>
+  <tr>
+    <td>Sadece harf ve en fazla 30 uzunlukta olan string: </td>
+    <td><input type="text" id="max30"></td>
+  </tr>
+  <tr>
+    <td>3 kelimeden oluşan string: </td>
+    <td><input type="text" id="uckelime"></td>
+  </tr>
+  <tr>
+    <td>En az 1 büyük harf, en az 1 küçük harf, en az bir rakam ve en az 1 noktalama işareti içeren ve en az 8 uzunluğunda olan metin: </td>
+    <td><input type="text" id="password"></td>
+  </tr>
+  
+
+</table>
+
+<br>
+  <input type="submit" value="Submit">
+</form>
+
+</body>
+</html>
